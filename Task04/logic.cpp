@@ -9,17 +9,17 @@
 #include "logic.h"
 
 int get_extreme_values(int** matrix, int n, int m, bool type) {
-	int max = matrix[0][0];
+	int value = matrix[0][0];
 	for (int i = 0; i < n; i++) {
 		for (int j = 0; j < m; j++) {
-			bool condition = type ? matrix[i][j]
-				if (type == true) {
-					
-				}
+			bool condition = type ? matrix[i][j] < value : matrix[i][j] > value;
+			if (condition) {
+				value = matrix[i][j];
+			}
 		}
 	}
 
-	return max;
+	return value;
 }
 
 //int get_min_values(int** matrix, int n, int m, bool type) {
@@ -50,8 +50,8 @@ int sum_elements_of_columns_with_extreme_value(int** matrix, int n, int m) {
 		return 0;
 	}
 
-	int max = get_max_values(matrix, n, m);
-	int min = get_min_values(matrix, n, m);
+	int max = get_extreme_values(matrix, n, m, false);
+	int min = get_extreme_values(matrix, n, m, true);
 	int sum = 0;
 
 	for (int j = 0; j < m; j++) {
